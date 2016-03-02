@@ -39,10 +39,10 @@
       2,
       "multi-line"
     ],
-    "eqeqeq": [
-      2,
-      "allow-null"
-    ]
+    "react/prop-types": 1,
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "react/react-in-jsx-scope": 2
   },
   "env": {
     "es6": true,
@@ -53,6 +53,16 @@
   "extends": "eslint:recommended",
   "ecmaFeatures": {
     "modules": true,
-    "experimentalObjectRestSpread": true
+    "jsx": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "globals": {
+    "__SERVER__": true,
+    "__CLIENT__": true,
+    "__DEVELOPMENT__": true,
+    "__DEVTOOLS__": true,
+    "__WEBPACK_ISOMORPHIC_TOOLS__": true
   }
 }

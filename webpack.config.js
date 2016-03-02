@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var entries = ['./src/client.js'];
 var plugins = [
@@ -14,10 +15,15 @@ var plugins = [
   }),
   new ExtractTextPlugin('bundle.css', {
     disable: process.env.NODE_ENV !== 'production'
+  }),
+  new HtmlWebpackPlugin({
+    title: 'zatu'
   })
 ];
 if (process.env.NODE_ENV !== 'production') {
-  entries.push('webpack-hot-middleware/client?overlay=true');
+  entries.push('webpack-dev-server/client?http://localhost:8080');
+  entries.push('webpack/hot/only-dev-server');
+  // entries.push('webpack-hot-middleware/client?overlay=true');
   plugins.push(new webpack.HotModuleReplacementPlugin());
 } else {
   plugins.push(new webpack.optimize.UglifyJsPlugin());
@@ -29,7 +35,7 @@ module.exports = {
   entry: entries,
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/assets/',
+    publicPath: '/',
     filename: 'bundle.js',
     chunkFilename: '[id].js'
   },
